@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as actions from '../../redux/contactsAction';
+
+import { contactsOperations, contactsSelectors } from 'redux/contacts';
 
 import PropTypes from 'prop-types';
 import s from './ContactList.module.scss';
 
 export default function ContactList() {
+  const contacts = useSelector(contactsSelectors.getContacts);
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
+  const filter = useSelector(contactsSelectors.getFilter);
+
+  useEffect(() => {
+    dispatch(contactsOperations.fetchContacts());
+  }, [dispatch]);
 
   const handleDelContact = id => {
-    const idxContact = contacts.findIndex(contact => {
-      return contact.id === id;
-    });
-
-    dispatch(actions.delContact(idxContact));
+    // const idxContact = contacts.findIndex(contact => {
+    //   return contact.id === id;
+    // });
+    // console.log(idxContact);
+    dispatch(contactsOperations.delContact(id));
   };
 
   const filterContact = () => {

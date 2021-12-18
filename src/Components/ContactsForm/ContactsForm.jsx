@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as actions from '../../redux/contactsAction';
+// import * as contactsActions from '../../redux/contacts/contactsAction';
+import { contactsOperations } from 'redux/contacts';
 import PropTypes from 'prop-types';
 import s from './ContactsForm.module.scss';
 
 export default function ContactsForm() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(state => state.contacts.entities);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -29,7 +30,7 @@ export default function ContactsForm() {
       return;
     }
 
-    dispatch(actions.addContact(name, number));
+    dispatch(contactsOperations.addContact(name, number));
   };
 
   const onSubmit = e => {
