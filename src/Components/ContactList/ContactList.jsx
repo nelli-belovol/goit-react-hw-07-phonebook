@@ -16,10 +16,6 @@ export default function ContactList() {
   }, [dispatch]);
 
   const handleDelContact = id => {
-    // const idxContact = contacts.findIndex(contact => {
-    //   return contact.id === id;
-    // });
-    // console.log(idxContact);
     dispatch(contactsOperations.delContact(id));
   };
 

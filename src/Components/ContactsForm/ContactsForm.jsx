@@ -29,8 +29,8 @@ export default function ContactsForm() {
       alert(`${name} is already in contacts.`);
       return;
     }
-
-    dispatch(contactsOperations.addContact(name, number));
+    const newContact = { name: name, phone: number };
+    dispatch(contactsOperations.addContact(newContact));
   };
 
   const onSubmit = e => {
